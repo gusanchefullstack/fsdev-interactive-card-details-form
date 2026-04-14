@@ -1,0 +1,55 @@
+:root {
+  /* Colors — Primary */
+  --color-gradient-start: hsl(249, 99%, 64%);
+  --color-gradient-end: hsl(278, 94%, 30%);
+  --color-error: hsl(0, 100%, 66%);
+
+  /* Colors — Neutral */
+  --color-white: hsl(0, 100%, 100%);
+  --color-gray-200: hsl(270, 3%, 87%);
+  --color-gray-400: hsl(212, 12%, 71%);
+  --color-purple-950: hsl(278, 68%, 11%);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(
+    to right,
+    var(--color-gradient-start),
+    var(--color-gradient-end)
+  );
+
+  /* Typography */
+  --font-family-base: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --font-weight-medium: 500;
+  --font-size-base: 18px;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1.125rem;
+  --font-size-lg: 1.75rem;
+  --letter-spacing-wide: 0.15em;
+  --letter-spacing-wider: 0.25em;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+
+  /* Radii */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+
+  /* Shadows */
+  --shadow-card: 0 20px 40px -15px hsla(278, 68%, 11%, 0.25);
+
+  /* Assets (paths served from /public) */
+  --bg-main-mobile: url("/images/bg-main-mobile.png");
+  --bg-main-desktop: url("/images/bg-main-desktop.png");
+  --bg-card-front: url("/images/bg-card-front.png");
+  --bg-card-back: url("/images/bg-card-back.png");
+}
