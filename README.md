@@ -1,33 +1,39 @@
-# Frontend Mentor - Interactive card details form solution
+# Interactive Card Details Form
 
-This is a solution to the [Interactive card details form challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/interactive-card-details-form-XpS8cKZDWw). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
+A responsive credit-card details form that previews the card in real time as the user types, validates inputs on submit, and shows a success confirmation — built as a [Frontend Mentor](https://www.frontendmentor.io/challenges/interactive-card-details-form-XpS8cKZDWw) challenge using only HTML, CSS, and vanilla JavaScript.
 
-## Table of contents
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-- [Overview](#overview)
-  - [The challenge](#the-challenge)
-  - [Screenshots](#screenshots)
-  - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
+## Table of Contents
+
+- [Motivation](#motivation)
+- [Live Demo](#live-demo)
+- [Screenshots](#screenshots)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [What I Learned](#what-i-learned)
+- [Roadmap](#roadmap)
+- [License](#license)
+- [Credits](#credits)
 - [Author](#author)
 
-## Overview
+## Motivation
 
-### The challenge
+Most card-entry UIs feel mechanical — this challenge focuses on making the form **feel alive**: the card visual updates as you type, inputs reformat themselves (spaces in the card number, slash in the expiry), and validation errors explain exactly what went wrong. The goal was to build all of that without reaching for a framework or form library — just clean HTML, CSS custom properties, and vanilla JS modules.
 
-Users should be able to:
+## Live Demo
 
-- Fill in the form and see the card details update in real-time
-- Receive error messages when the form is submitted if:
-  - Any input field is empty
-  - The card number, expiry date, or CVC fields are in the wrong format
-- View the optimal layout depending on their device's screen size
-- See hover, active, and focus states for interactive elements on the page
+[fsdev-interactive-card-details-form.vercel.app](https://fsdev-interactive-card-details-form.vercel.app)
 
-### Screenshots
+## Screenshots
 
 **Desktop (1440px)**
 
@@ -37,43 +43,114 @@ Users should be able to:
 
 <img src="./screenshots/mobile-375.png" alt="Mobile view at 375px" width="280" />
 
-### Links
+## Features
 
-- Solution URL: _coming soon_
-- Live Site URL: _coming soon_
+- Live card preview that updates on every keystroke
+- Auto-formatting: card number grouped in 4-digit blocks, `MM/YY` expiry
+- Client-side validation with inline error messages (empty fields, wrong format, digits-only rules)
+- Hover, focus, and error states with gradient-bordered focus rings
+- Success screen after a valid submission, with a "Continue" action to reset the form
+- Fully responsive: tuned at 375px (mobile) and 1440px (desktop), fluid in between
+- Zero runtime dependencies — ships as static HTML/CSS/JS
 
-## My process
+## Tech Stack
 
-### Built with
-
-- Semantic HTML5 markup
-- CSS custom properties (design tokens for colors, gradients, typography, spacing)
-- Flexbox & CSS Grid
-- Mobile-first responsive design
+- Semantic HTML5
+- CSS3 with custom properties (design tokens for colors, gradients, typography, spacing)
+- Flexbox & CSS Grid, mobile-first responsive design
 - Vanilla JavaScript (ES modules)
 - [Vite](https://vitejs.dev/) — dev server and build tool
-- [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk) — via Google Fonts
+- [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk) via Google Fonts
 
-### What I learned
+## Installation
 
-- Using a **gradient border** on focused inputs with the CSS double-background trick (`background-origin: border-box` + `background-clip: padding-box, border-box`).
-- Coordinating an **absolutely positioned card** that overflows its panel into the next section — without `overflow: hidden` cropping it.
-- Live-updating a preview by binding plain `input` events to `data-preview` targets, keeping DOM updates colocated with formatters.
+**Prerequisites:** Node.js >= 18
 
-```js
-cardnumber.addEventListener('input', (e) => {
-  const formatted = formatCardNumber(e.target.value);
-  e.target.value = formatted;
-  preview('number').textContent = formatted || DEFAULTS.number;
-});
+```bash
+git clone https://github.com/gusanchefullstack/fsdev-interactive-card-details-form.git
+cd fsdev-interactive-card-details-form
+npm install
 ```
 
-### Continued development
+## Usage
 
-- Add unit tests for `formatters.js` and `validators.js`.
-- Improve focus management when the success state appears (move focus to the heading).
-- Add reduced-motion / prefers-color-scheme variants.
+```bash
+npm run dev        # Start Vite dev server at http://localhost:5173
+npm run build      # Build static assets into dist/
+npm run preview    # Serve the production build locally
+```
+
+Open the dev server, fill in the form, and watch the card update in real time. Submit with invalid values to see error states; submit with valid values to see the success screen.
+
+## Project Structure
+
+```
+src/
+├── index.html         # Markup and semantic structure
+├── main.js            # Entry point — wires formatters, validators, and UI
+├── js/
+│   ├── formatters.js  # Card number and expiry formatting helpers
+│   ├── validators.js  # Per-field validation rules and error messages
+│   └── ui.js          # DOM bindings, preview updates, success flow
+└── styles/
+    ├── tokens.css     # Colors, gradients, typography, spacing tokens
+    ├── base.css       # Reset, typography base, body background
+    ├── layout.css     # Page layout (card panel + form panel)
+    ├── card.css       # Front and back card visuals
+    ├── form.css       # Inputs, labels, buttons, error states
+    └── success.css    # Success confirmation screen
+screenshots/           # Desktop and mobile reference captures
+```
+
+## What I Learned
+
+Key takeaways from building this project:
+
+- **Gradient borders on focused inputs** using the CSS double-background trick — `background-origin: border-box` combined with `background-clip: padding-box, border-box` to paint a gradient only on the border area without an extra wrapper element.
+- **Absolutely positioned card overflow** — the card visual overlaps into the form panel on desktop and sits above it on mobile. The trick is *not* clipping the ancestors: no `overflow: hidden` on the panel, and using `position: absolute` anchored to a relative container that spans the full viewport height.
+- **Colocated input handlers** — keeping the formatter, the DOM update, and the preview binding in the same `input` listener makes the data flow trivial to follow, and removes the need for a state store.
+
+  ```js
+  cardnumber.addEventListener('input', (e) => {
+    const formatted = formatCardNumber(e.target.value);
+    e.target.value = formatted;
+    preview('number').textContent = formatted || DEFAULTS.number;
+  });
+  ```
+
+- **Design tokens in plain CSS** — `:root { --color-...; --gradient-...; --font-...; }` is enough to parameterize an entire small app without a preprocessor.
+- **One `<main>` per page** — keeping the semantic structure disciplined (one `<main>`, a proper `<footer>`, no role duplication) makes the form more accessible by default without extra ARIA.
+
+**References:**
+- [MDN: `background-clip`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip)
+- [MDN: Client-side form validation](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation)
+- [Vite Guide](https://vitejs.dev/guide/)
+- [Frontend Mentor challenge brief](https://www.frontendmentor.io/challenges/interactive-card-details-form-XpS8cKZDWw)
+
+## Roadmap
+
+- [x] Front/back card visuals matching the Figma design
+- [x] Real-time preview and input formatters
+- [x] Inline validation and error messages
+- [x] Success confirmation flow
+- [x] Responsive layout (mobile, tablet, desktop)
+- [x] Deploy to Vercel
+- [ ] Unit tests for `formatters.js` and `validators.js`
+- [ ] Move focus to the success heading when the confirmation appears
+- [ ] `prefers-reduced-motion` and `prefers-color-scheme` variants
+
+## License
+
+Distributed under the MIT License. See [LICENSE](./LICENSE) for details.
+
+## Credits
+
+- Challenge and design by [Frontend Mentor](https://www.frontendmentor.io/).
+- Typography: [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk) by Florian Karsten.
+- Built with [Vite](https://vitejs.dev/) and deployed on [Vercel](https://vercel.com/).
 
 ## Author
+
+**Gustavo Sanchez Galarza**
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gustavosanchezgalarza/) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/gusanchefullstack) [![Hashnode](https://img.shields.io/badge/Hashnode-2962FF?style=flat&logo=hashnode&logoColor=white)](https://hashnode.com/@gusanchedev) [![X](https://img.shields.io/badge/X-000000?style=flat&logo=x&logoColor=white)](https://x.com/gusanchedev) [![Bluesky](https://img.shields.io/badge/Bluesky-0085FF?style=flat&logo=bluesky&logoColor=white)](https://bsky.app/profile/gusanchedev.bsky.social) [![freeCodeCamp](https://img.shields.io/badge/freeCodeCamp-0A0A23?style=flat&logo=freecodecamp&logoColor=white)](https://www.freecodecamp.org/gusanchedev) [![Frontend Mentor](https://img.shields.io/badge/Frontend%20Mentor-3F54A3?style=flat&logo=frontendmentor&logoColor=white)](https://www.frontendmentor.io/profile/gusanchefullstack)
